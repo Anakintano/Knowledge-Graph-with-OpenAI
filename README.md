@@ -120,7 +120,7 @@ All scripts are generated via Colab using `%%writefile`:
 ```
 ├── KnowledgeGraph.ipynb    # Main notebook
 ├── app.py                  # Streamlit app
-├── utils.py                # Helper logic (if needed)
+├── utils.py                # Helper logic (if needed) (not in the project yet)
 ├── .env                    # API key
 └── requirements.txt        # Dependencies
 ```
