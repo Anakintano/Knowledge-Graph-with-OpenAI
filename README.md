@@ -1,82 +1,146 @@
-#  <img src="https://github.com/user-attachments/assets/0ee677be-e7c0-40df-9aaa-9d078b5e3ce5" alt="streamlit" style="height: 50px; vertical-align: middle; margin-left: 10px;"> Knowledge Graph Generator 
-A Streamlit application that extract graph data (entities and relationships) from text input using LangChain and OpenAI's GPT models, and generates interactive graphs.
+# <img src="https://github.com/user-attachments/assets/0ee677be-e7c0-40df-9aaa-9d078b5e3ce5" alt="streamlit" style="height: 50px; vertical-align: middle; margin-left: 10px;"> Knowledge Graph Generator
+
+A Colab-based Streamlit application that extracts graph data (entities and relationships) from text input using **LangChain** and **OpenAI's GPT-4o** models, then visualizes it interactively as a dynamic knowledge graph.
+
 ![CleanShot 2025-05-28 at 13 11 46](https://github.com/user-attachments/assets/4fef9158-8dd8-432d-bb8a-b53953a82c6c)
 
-## Features
+---
 
-- Two input methods: text upload (.txt files) or direct text input
-- Interactive knowledge graph visualization
-- Customizable graph display with physics-based layout
-- Entity relationship extraction powered by OpenAI's GPT-4o model
+## 🚀 Features
 
-## Installation
+- 📂 Input support for both `.txt` uploads and direct text entry  
+- 🧠 Automatic entity and relationship extraction using GPT-4o  
+- 🕸️ Interactive knowledge graph with physics-based layout  
+- 🔄 Real-time drag, zoom, and hover interactivity with PyVis  
+- 🌐 Fully deployable via Streamlit within Colab using `%%writefile`  
 
-### Prerequisites
+---
 
-- Python 3.8 or higher
+## ⚙️ Installation
+
+### ✅ Prerequisites
+
+- Python 3.8+
 - OpenAI API key
 
-### Dependencies
+### 📦 Dependencies
 
-The application requires the following Python packages:
+The following Python packages are required:
 
-- langchain (>= 0.1.0): Core LLM framework
-- langchain-experimental (>= 0.0.45): Experimental LangChain features
-- langchain-openai (>= 0.1.0): OpenAI integration for LangChain
-- python-dotenv (>= 1.0.0): Environment variable support
-- pyvis (>= 0.3.2): Graph visualization
-- streamlit (>= 1.32.0): Web UI framework
+- `langchain >= 0.1.0`
+- `langchain-experimental >= 0.0.45`
+- `langchain-openai >= 0.1.0`
+- `python-dotenv >= 1.0.0`
+- `pyvis >= 0.3.2`
+- `streamlit >= 1.32.0`
 
-Install all required dependencies using the provided requirements.txt file:
+Install all dependencies using:
 
 ```bash
 pip install -r requirements.txt
+````
+
+> In Colab, you can also run:
+
+```python
+!pip install -r requirements.txt
 ```
 
-### Setup
+---
 
-1. Clone this repository:
+## 🔐 API Key Setup
 
-2. Create a `.env` file in the root directory with your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
+Create a `.env` file in the notebook with:
 
-## Running the Application
-
-To run the Streamlit app:
-
-```bash
-streamlit run app.py
+```python
+%%writefile .env
+OPENAI_API_KEY=your_openai_api_key_here
 ```
-This will start the application and open it in your default web browser (typically at http://localhost:8501).
 
-## Usage
+Or set it dynamically in the notebook:
 
-1. Choose your input method from the sidebar (Upload txt or Input text)
-2. If uploading a file, select a .txt file from your computer
-3. If using direct input, type or paste your text into the text area
-4. Click the "Generate Knowledge Graph" button
-5. Wait for the graph to be generated (this may take a few moments depending on the length of the text)
-6. Explore the interactive knowledge graph:
-   - Drag nodes to rearrange the graph
-   - Hover over nodes and edges to see additional information
-   - Zoom in/out using the mouse wheel
-   - Filter the graph for specific nodes and edges.
+```python
+import os
+os.environ["OPENAI_API_KEY"] = "your_openai_api_key_here"
+```
 
-## How It Works
+---
 
-The application uses LangChain's experimental graph transformers with OpenAI's GPT-4o model to:
-1. Extract entities from the input text
-2. Identify relationships between these entities
-3. Generate a graph structure representing this information
-4. Visualize the graph using PyVis, a Python interface for the vis.js visualization library
+## ▶️ Running the App in Colab
 
-## License
+Since this app uses `%%writefile` to generate scripts:
 
-This project is licensed under the MIT License - a permissive open source license that allows for free use, modification, and distribution of the software.
+1. Run each notebook cell to write required files like `app.py`
+2. Launch the Streamlit app using:
 
-For more details, see the [MIT License](https://opensource.org/licenses/MIT) documentation.
+```python
+!streamlit run app.py
+```
+
+> Colab will give you a public URL to access the interface.
+
+---
+
+## 🧠 How to Use
+
+1. Select input method in the sidebar:
+
+   * 📄 Upload a `.txt` file, or
+   * 📝 Enter text directly
+2. Click **"Generate Knowledge Graph"**
+3. Interact with the graph:
+
+   * Drag nodes
+   * Zoom in/out with mouse wheel
+   * Hover to see details
+   * Apply graph filters and layouts
+
+---
+
+## 🧪 How It Works
+
+1. Your input text is sent through a LangChain `GraphTransformer`
+2. GPT-4o identifies `(entity) - [relationship] → (entity)` triplets
+3. A NetworkX graph is built from those triplets
+4. PyVis visualizes the graph inside Streamlit
+
+Example triplets:
+
+```
+(Isaac Newton) - [discovered] → (Laws of Motion)  
+(Laws of Motion) - [published in] → (1687)
+```
+
+---
+
+## 📁 Project Structure
+
+All scripts are generated via Colab using `%%writefile`:
+
+```
+├── KnowledgeGraph.ipynb    # Main notebook
+├── app.py                  # Streamlit app
+├── utils.py                # Helper logic (if needed)
+├── .env                    # API key
+└── requirements.txt        # Dependencies
+```
+
+---
+
+## 🧑‍💻 Author
+
+© Aditya Saxena, 2025
+Licensed under the MIT License.
+See: [MIT License](https://opensource.org/licenses/MIT)
+
+---
+
+## 📚 Resources
+
+* [LangChain Docs](https://docs.langchain.com/)
+* [OpenAI API Docs](https://platform.openai.com/docs)
+* [Streamlit](https://docs.streamlit.io/)
+* [PyVis Docs](https://pyvis.readthedocs.io/)
 
 
-&copy; Aditya Saxena 2025
+
