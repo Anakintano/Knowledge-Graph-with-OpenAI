@@ -1,5 +1,4 @@
-# Knowledge Graph Generator
-
+#  <img src="https://github.com/user-attachments/assets/0ee677be-e7c0-40df-9aaa-9d078b5e3ce5" alt="streamlit" style="height: 50px; vertical-align: middle; margin-left: 10px;"> Knowledge Graph Generator 
 A Streamlit application that extract graph data (entities and relationships) from text input using LangChain and OpenAI's GPT models, and generates interactive graphs.
 ![CleanShot 2025-05-28 at 13 11 46](https://github.com/user-attachments/assets/4fef9158-8dd8-432d-bb8a-b53953a82c6c)
 
